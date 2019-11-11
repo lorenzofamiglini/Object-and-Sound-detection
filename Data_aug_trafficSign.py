@@ -40,47 +40,6 @@ len(data)
 len(y_train)
 np.unique(y_train)
 np.shape(data)
-"""
-Shuffle dataset
-"""
-from sklearn.utils import shuffle
-y_train = y_train.reshape(y_train.shape[0])
-X_train, y_train = shuffle(X_train,y_train, random_state=1)
-
-for i in range(len(X_train[100:200])):
-    plt.axis("off")
-    plt.title(y_train[i])
-    plt.imshow(cv2.cvtColor(X_train[i], cv2.COLOR_BGR2RGB))
-    plt.show()
-
-
-"""
-Data augmentation
-"""
-from keras.preprocessing import image
-for i in range(0,10):
-    x = X_train[i].reshape((1,)+ X_train[i].shape)
-    x.shape
-
-
-    datagen = keras.preprocessing.image.ImageDataGenerator(featurewise_center=True,
-        featurewise_std_normalization=True,
-        rotation_range=20,
-        width_shift_range=0.2,
-        height_shift_range=0.2,
-        horizontal_flip=False)
-    i = 0
-    for batch in datagen.flow(x, batch_size=1):
-        plt.figure(i)
-        app = (batch - batch.min()) / (batch.max()-batch.min())
-        #imgplot= plt.imshow(app[0])
-        plt.imshow(cv2.cvtColor(app[0], cv2.COLOR_BGR2RGB))
-        i += 1
-        if i % 10 == 0:
-            break
-        plt.show()
-
-
 
 """
 ANALISI DATI
@@ -130,6 +89,32 @@ g.plot_marginals(sns.distplot)
 
 g = sns.jointplot(x="height", y="width", data=df_hw, kind='kde')
 
+"""
+Data augmentation
+"""
+from keras.preprocessing import image
+for i in range(0,10):
+    x = X_train[i].reshape((1,)+ X_train[i].shape)
+    x.shape
+
+
+    datagen = keras.preprocessing.image.ImageDataGenerator(featurewise_center=True,
+        featurewise_std_normalization=True,
+        rotation_range=20,
+        width_shift_range=0.2,
+        height_shift_range=0.2,
+        horizontal_flip=False)
+    i = 0
+    for batch in datagen.flow(x, batch_size=1):
+        plt.figure(i)
+        app = (batch - batch.min()) / (batch.max()-batch.min())
+        #imgplot= plt.imshow(app[0])
+        plt.imshow(cv2.cvtColor(app[0], cv2.COLOR_BGR2RGB))
+        i += 1
+        if i % 10 == 0:
+            break
+        plt.show()
+
 
 """
 Normalizzazione
@@ -141,31 +126,10 @@ X_train.max()
 X_train.min()
 
 
+
 """
-Denoising autoencoder
+Shuffle dataset
 """
-
-from keras.layers import Input, Dense
-from keras.models import Model
-
-input_img= Input(shape=(np.shape(X_train)[1]*np.shape(X_train)[1],3))
-
-# encoded and decoded layer for the autoencoder
-encoded = Dense(units=128, activation='relu')(input_img)
-encoded = Dense(units=64, activation='relu')(encoded)
-encoded = Dense(units=32, activation='relu')(encoded)
-decoded = Dense(units=64, activation='relu')(encoded)
-decoded = Dense(units=128, activation='relu')(decoded)
-decoded = Dense(units=900, activation='sigmoid')(decoded)
-
-# Building autoencoder
-autoencoder=Model(input_img, decoded)
-#extracting encoder
-encoder = Model(input_img, encoded)
-# compiling the autoencoder
-autoencoder.compile(optimizer='adadelta', loss='binary_crossentropy', metrics=['accuracy'])
-# Fitting the noise trained data to the autoencoder
-autoencoder.fit(X_train, X_train,
-                epochs=100,
-                batch_size=256,
-                shuffle=True, verbose=1)
+from sklearn.utils import shuffle
+y_train = y_train.reshape(y_train.shape[0])
+X_train, y_train = shuffle(X_train,y_train, random_state=1)
