@@ -1,0 +1,44 @@
+,target,title,type
+0,0,Limite massimo di velocità di 20 Km/h,divieto
+1,1,Limite massimo di velocità di 30 Km/h,divieto
+2,2,Limite massimo di velocità di 50 Km/h,divieto
+3,3,Limite massimo di velocità di 60 Km/h,divieto
+4,4,Limite massimo di velocità di 70 Km/h,divieto
+5,5,Limite massimo di velocità di 80 Km/h,divieto
+6,6,Fine del limite massimo di velocità,divieto
+7,7,Limite massimo di velocità di 100 Km/h,divieto
+8,8,Limite massimo di velocità di 120 Km/h,divieto
+9,9,Divieto di sorpasso,divieto
+10,10,"Divieto di sorpasso per gli autocarri che superano 3,5 T",divieto
+11,11,Inserzione con diritto di precedenza,precedenza
+12,12,Diritto di precendenza,precedenza
+13,13,Dare precedenza,precedenza
+14,14,Fermarsi e dare precedenza (STOP),precedenza
+15,15,Divieto di transito,divieto
+16,16,"Divieto di transito agli autocarri che superano 3,5 T",divieto
+17,17,Senso vietato,divieto
+18,18,Altri pericoli,pericolo
+19,19,Curva a sinistra,pericolo
+20,20,Curva a destra,pericolo
+21,21,"Doppia curva, la prima a sinistra",pericolo
+22,22,Strada deformata,pericolo
+23,23,Strada sdrucciolevole,pericolo
+24,24,Strettoia asimmetrica a destra,pericolo
+25,25,Lavori,cantiere
+26,26,Preavviso di semaforo verticale,pericolo
+27,27,Attraversamento pedonale,pericolo
+28,28,Attenzione ai bambini,pericolo
+29,29,Attraversamento ciclabile,pericolo
+30,30,Pericolo ghiaccio,pericolo
+31,31,Animali selvatici vaganti,pericolo
+32,32,Via libera,divieto
+33,33,Preavviso direzione obbligatoria a destra,obbligo
+34,34,Preavviso direzione obbligatoria a sinistra,obbligo
+35,35,Direzione obbligatoria diritto,obbligo
+36,36,Direzioni consentite diritto e destra,obbligo
+37,37,Direzioni consentite diritto e sinistra,obbligo
+38,38,Passaggio obbligatorio a destra,obbligo
+39,39,Passaggio obbligatorio a sinistra,obbligo
+40,40,Rotatoria,obbligo
+41,41,Fine del divieto di sorpasso,divieto
+42,42,"Fine del divieto di sorpasso per gli autocarri che superano 3,5 T",divieto
