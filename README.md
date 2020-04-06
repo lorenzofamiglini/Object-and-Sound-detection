@@ -1,6 +1,5 @@
 # Object-and-Sound-detection traffic sign and word trigger recognition: 
-
-Object and Sound detection with Deep Learning and Machine Learning techniques. For the optimization part, AutoML was applied in order to obtain good models. 
+Application of Deep Learning and Machine Learning techniques. For the optimization part, AutoML was applied in order to obtain good models. 
 
 Ogni file è di seguito descritto:
 
