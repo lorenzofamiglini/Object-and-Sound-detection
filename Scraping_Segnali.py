@@ -26,8 +26,8 @@ all_description = []
 all_title = []
 voci = ["pericolo","precedenza", "divieto"]
 
-link = "http://quizscuolaguida.altervista.org/teoria/indicazione+.html" #take the general link
-for i in range(4,7):
+link = "http://quizscuolaguida.altervista.org/teoria/complementari+.html" #take the general link
+for i in range(1,5):
     link = re.sub(r'(\+)',str(i), link) #we need to replace "+" and insert the title
     try:
         result = requests.get(link, headers=headers)
@@ -37,18 +37,90 @@ for i in range(4,7):
         all_title.extend(titolo)
     except AttributeError:
         pass
-    link = "http://quizscuolaguida.altervista.org/teoria/indicazione+.html"
+    link = "http://quizscuolaguida.altervista.org/teoria/complementari+.html"
 
-#pericolo, precedenza, divieto, obbligo, indicazione (pagine 4-6),
-all_description
-all_title
+"""
+Creazione del dataframe con il target, titolo e descrizione
+"""
+#pericolo, precedenza, divieto, obbligo, indicazione, complementari
+len(all_description)
+len(all_title)
+agggiornamento = ['Limite massimo di velocità di 20 Km/h',
+'Limite massimo di velocità di 30 Km/h',
+'Limite massimo di velocità di 50 Km/h',
+'Limite massimo di velocità di 60 Km/h',
+'Limite massimo di velocità di 70 Km/h',
+'Limite massimo di velocità di 100 Km/h',
+'Limite massimo di velocità di 120 Km/h']
+aggiornamento_descr = ["Indica la velocità massima consentita per tutti i veicoli, ha validità immediatamente dopo il segnale; prescrive di marciare a velocità inferiore o uguale al valore indicato. Bisogna tenere conto però delle condizioni della strada (tale segnale non indica che in ogni circostanza, anche con scarsa visibilità, possiamo procedere a 20 km/h). Il segnale non indica la velocità consigliata o quella minima, ma la velocità massima da non superare. Vale anche per i motocicli. Si può trovare su strade extraurbane ed in autostrada (ad esempio: quando ci sono lavori in corso).",
+                       "Indica la velocità massima consentita per tutti i veicoli, ha validità immediatamente dopo il segnale; prescrive di marciare a velocità inferiore o uguale al valore indicato. Bisogna tenere conto però delle condizioni della strada (tale segnale non indica che in ogni circostanza, anche con scarsa visibilità, possiamo procedere a 30 km/h). Il segnale non indica la velocità consigliata o quella minima, ma la velocità massima da non superare. Vale anche per i motocicli. Si può trovare su strade extraurbane ed in autostrada (ad esempio: quando ci sono lavori in corso).",
+                       "Indica la velocità massima consentita per tutti i veicoli, ha validità immediatamente dopo il segnale; prescrive di marciare a velocità inferiore o uguale al valore indicato. Bisogna tenere conto però delle condizioni della strada (tale segnale non indica che in ogni circostanza, anche con scarsa visibilità, possiamo procedere a 50 km/h). Il segnale non indica la velocità consigliata o quella minima, ma la velocità massima da non superare. Vale anche per i motocicli. Si può trovare su strade extraurbane ed in autostrada (ad esempio: quando ci sono lavori in corso).",
+                       "Indica la velocità massima consentita per tutti i veicoli, ha validità immediatamente dopo il segnale; prescrive di marciare a velocità inferiore o uguale al valore indicato. Bisogna tenere conto però delle condizioni della strada (tale segnale non indica che in ogni circostanza, anche con scarsa visibilità, possiamo procedere a 60 km/h). Il segnale non indica la velocità consigliata o quella minima, ma la velocità massima da non superare. Vale anche per i motocicli. Si può trovare su strade extraurbane ed in autostrada (ad esempio: quando ci sono lavori in corso).",
+                       "Indica la velocità massima consentita per tutti i veicoli, ha validità immediatamente dopo il segnale; prescrive di marciare a velocità inferiore o uguale al valore indicato. Bisogna tenere conto però delle condizioni della strada (tale segnale non indica che in ogni circostanza, anche con scarsa visibilità, possiamo procedere a 70 km/h). Il segnale non indica la velocità consigliata o quella minima, ma la velocità massima da non superare. Vale anche per i motocicli. Si può trovare su strade extraurbane ed in autostrada (ad esempio: quando ci sono lavori in corso).",
+                       "Indica la velocità massima consentita per tutti i veicoli, ha validità immediatamente dopo il segnale; prescrive di marciare a velocità inferiore o uguale al valore indicato. Bisogna tenere conto però delle condizioni della strada (tale segnale non indica che in ogni circostanza, anche con scarsa visibilità, possiamo procedere a 100 km/h). Il segnale non indica la velocità consigliata o quella minima, ma la velocità massima da non superare. Vale anche per i motocicli. Si può trovare su strade extraurbane ed in autostrada (ad esempio: quando ci sono lavori in corso).",
+                       "Indica la velocità massima consentita per tutti i veicoli, ha validità immediatamente dopo il segnale; prescrive di marciare a velocità inferiore o uguale al valore indicato. Bisogna tenere conto però delle condizioni della strada (tale segnale non indica che in ogni circostanza, anche con scarsa visibilità, possiamo procedere a 120 km/h). Il segnale non indica la velocità consigliata o quella minima, ma la velocità massima da non superare. Vale anche per i motocicli. Si può trovare su strade extraurbane ed in autostrada (ad esempio: quando ci sono lavori in corso)."]
+all_title.extend(agggiornamento)
+all_description.extend(aggiornamento_descr)
 
 df = pd.DataFrame()
 df["title"] = all_title
 df["description"] = all_description
 
-df
+"""
+Match dei due dataframe per avere la variabile target associata
+"""
 
+match_diz = {"0":'Limite massimo di velocità di 20 Km/h',
+"1":'Limite massimo di velocità di 30 Km/h',
+"2":'Limite massimo di velocità di 50 Km/h',
+"3":'Limite massimo di velocità di 60 Km/h',
+"4":'Limite massimo di velocità di 70 Km/h',
+"5":'Limite massimo di velocità di 80 Km/h',
+"6":'Fine del limite massimo di velocità',
+"7":'Limite massimo di velocità di 100 Km/h',
+"8":'Limite massimo di velocità di 120 Km/h',
+"9":'Divieto di sorpasso',
+"10":'Divieto di sorpasso per gli autocarri che superano 3,5 T',
+"11":'Inserzione con diritto di precedenza',
+"12":'Diritto di precendenza',
+"13":'Dare precedenza',
+"14":'Fermarsi e dare precedenza (STOP)',
+"15":'Divieto di transito',
+"16":'Divieto di transito agli autocarri che superano 3,5 T',
+"17":'Senso vietato',
+"18":'Altri pericoli',
+"19":'Curva a sinistra',
+"20":'Curva a destra',
+"21":'Doppia curva, la prima a sinistra',
+"22":'Strada deformata',
+"23":'Strada sdrucciolevole',
+"24":'Strettoia asimmetrica a destra',
+"25":'Lavori',
+"26":'Preavviso di semaforo verticale',
+"27":'Attraversamento pedonale',
+"28":'Attenzione ai bambini',
+"29":'Attraversamento ciclabile',
+"30":'***',
+"31":'Animali selvatici vaganti',
+"32":'Via libera',
+"33":'Preavviso direzione obbligatoria a destra',
+"34":'Preavviso direzione obbligatoria a sinistra',
+"35":'Direzione obbligatoria diritto',
+"36":'Direzioni consentite diritto e destra',
+"37":'Direzioni consentite diritto e sinistra',
+"38":'Passaggio obbligatorio a destra',
+"39":'Passaggio obbligatorio a sinistra',
+"40":'Rotatoria',
+"41":'Fine del divieto di sorpasso',
+"42":'Fine del divieto di sorpasso per gli autocarri che superano 3,5 T'}
+match_df = pd.DataFrame.from_dict(match_diz, orient = "index", columns = ["title"])
+match_df["target"] = match_df.index
+
+final_match = pd.merge(match_df, df, on='title', how='left', validate="one_to_many")
+
+#final_match.to_csv("/Users/lorenzofamiglini/Desktop/final_segnali_stradali.csv")
+
+final_match
 
 """
 Salvare immagine dall'html
